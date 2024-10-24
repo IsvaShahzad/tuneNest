@@ -1,0 +1,57 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.example.spotifyapi"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion "25.1.8937393"
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId = "com.example.spotifyapi"
+        minSdk = 24
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+        multiDexEnabled true
+
+    }
+
+    buildTypes {
+        debug {
+            manifestPlaceholders = [
+                    redirectHostName: "callback", // Replace with your actual host
+                    redirectSchemeName: "yourapp" // Replace with your actual scheme
+            ]
+        }
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'  // Add this line to specify the libs directory
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.aar'])
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.7.2'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.10'
+}
+
+flutter {
+    source = "../.."
+}
