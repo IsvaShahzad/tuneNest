@@ -19,8 +19,7 @@ class SongDetailScreen extends StatelessWidget {
 
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
-    }
-    else {
+    } else {
       print('Could not launch $trackUrl, trying to open in web browser');
 
       // Attempt to open the URL directly
@@ -36,30 +35,66 @@ class SongDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(songName),
-      ),
-      body: Center(
+      backgroundColor: Colors.black,
+      body: SingleChildScrollView( // Enable scrolling for smaller screens
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.network(imageUrl),
+            // Image at the top
+            Container(
+              margin: EdgeInsets.only(top: 20), // Add margin to the top
+              child: Image.network(
+                imageUrl,
+                height: 400, // Set a height for the image
+                fit: BoxFit.cover, // Ensure the image covers the space
+                width: double.infinity, // Full width
+              ),
+            ),
             SizedBox(height: 20),
             Text(
               songName,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 23, color: Colors.white, fontFamily: 'Montserrat'),
+              textAlign: TextAlign.center, // Center the text
             ),
             SizedBox(height: 8),
             Text(
-              'Artist: $artist',
-              style: TextStyle(fontSize: 20),
+              artist,
+              style: TextStyle(fontSize: 15, color: Colors.white, fontFamily: 'Montserrat'),
+              textAlign: TextAlign.center, // Center the text
             ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                _playTrack('https://open.spotify.com/track/$trackId');
-              },
-              child: Text('Play'),
+            SizedBox(height: 35),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 50),
+              child: ElevatedButton(
+                onPressed: () {
+                  _playTrack('https://open.spotify.com/track/$trackId');
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(0), // Square corners
+                  ),
+                  backgroundColor: Colors.white, // Set button color to white
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10), // Adjusted padding
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center, // Center the content
+                  children: [
+                    Text(
+                      'Play', // Button text
+                      style: TextStyle(
+                        color: Colors.black, // Text color
+                        fontSize: 16,
+                        fontFamily: 'Montserrat', // Text font
+                      ),
+                    ),
+                    SizedBox(width: 5), // Space between text and icon
+                    Icon(
+                      Icons.play_arrow, // Play icon
+                      color: Colors.black, // Set icon color to black for contrast
+                      size: 25, // Size of the icon
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
         ),

@@ -26,24 +26,26 @@ class SpotifyAuth {
 
   // In your SpotifyAuth class
 
-  Future<List<Track>> searchTracksByArtist(String artistName, String accessToken) async {
+  Future<List<Track>?> searchTracksByArtist(String artist, String accessToken) async {
     final response = await http.get(
-      Uri.parse('https://api.spotify.com/v1/search?q=$artistName&type=track&limit=50'),
+      Uri.parse('https://api.spotify.com/v1/search?q=$artist&type=track'),
       headers: {
         'Authorization': 'Bearer $accessToken',
       },
     );
 
     if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      final List<Track> tracks = (data['tracks']['items'] as List)
-          .map((trackData) => Track.fromJson(trackData)) // Adjust according to your Track model
+      final data = jsonDecode(response.body);
+      List<Track> tracks = (data['tracks']['items'] as List)
+          .map((trackJson) => Track.fromJson(trackJson))
           .toList();
       return tracks;
     } else {
-      throw Exception('Failed to load tracks');
+      print('Error fetching tracks: ${response.statusCode}');
+      return null;
     }
   }
+
 
 
 
