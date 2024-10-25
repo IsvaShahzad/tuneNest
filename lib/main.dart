@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spotifyapi/splash.dart';
 
 import 'screens/homescreen.dart';
 

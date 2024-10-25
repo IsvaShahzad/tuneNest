@@ -34,63 +34,84 @@ class SongDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: Colors.black,
-      body: SingleChildScrollView( // Enable scrolling for smaller screens
+      body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Image at the top
+            // Responsive image
             Container(
-              margin: EdgeInsets.only(top: 20), // Add margin to the top
+              margin: EdgeInsets.only(top: screenHeight * 0.02),
+              width: double.infinity,
               child: Image.network(
                 imageUrl,
-                height: 400, // Set a height for the image
-                fit: BoxFit.cover, // Ensure the image covers the space
-                width: double.infinity, // Full width
+                height: screenHeight * 0.57,
+                fit: BoxFit.cover,
               ),
             ),
-            SizedBox(height: 20),
-            Text(
-              songName,
-              style: TextStyle(fontSize: 23, color: Colors.white, fontFamily: 'Montserrat'),
-              textAlign: TextAlign.center, // Center the text
-            ),
-            SizedBox(height: 8),
-            Text(
-              artist,
-              style: TextStyle(fontSize: 15, color: Colors.white, fontFamily: 'Montserrat'),
-              textAlign: TextAlign.center, // Center the text
-            ),
-            SizedBox(height: 35),
+            SizedBox(height: screenHeight * 0.02),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 50),
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+              child: Text(
+                songName,
+                style: TextStyle(
+                  fontSize: screenWidth * 0.06,
+                  color: Colors.white,
+                  fontFamily: 'Montserrat',
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            SizedBox(height: screenHeight * 0.01),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+              child: Text(
+                artist,
+                style: TextStyle(
+                  fontSize: screenWidth * 0.04,
+                  color: Colors.white,
+                  fontFamily: 'Montserrat',
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            SizedBox(height: screenHeight * 0.05),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
               child: ElevatedButton(
                 onPressed: () {
                   _playTrack('https://open.spotify.com/track/$trackId');
                 },
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(0), // Square corners
+                    borderRadius: BorderRadius.circular(0),
                   ),
-                  backgroundColor: Colors.white, // Set button color to white
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10), // Adjusted padding
+                  backgroundColor: Colors.white,
+                  padding: EdgeInsets.symmetric(
+                    vertical: screenHeight * 0.015,
+                    horizontal: screenWidth * 0.05,
+                  ),
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center, // Center the content
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Play', // Button text
+                      'Play',
                       style: TextStyle(
-                        color: Colors.black, // Text color
-                        fontSize: 16,
-                        fontFamily: 'Montserrat', // Text font
+                        color: Colors.black,
+                        fontSize: screenWidth * 0.045,
+                        fontFamily: 'Montserrat',
                       ),
                     ),
-                    SizedBox(width: 5), // Space between text and icon
+                    SizedBox(width: screenWidth * 0.02),
                     Icon(
-                      Icons.play_arrow, // Play icon
-                      color: Colors.black, // Set icon color to black for contrast
-                      size: 25, // Size of the icon
+                      Icons.play_arrow,
+                      color: Colors.black,
+                      size: screenWidth * 0.06,
                     ),
                   ],
                 ),
