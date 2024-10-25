@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:http/http.dart' as http;
 
-import 'model.dart';
+import '../model/model.dart';
 
 class SpotifyAuth {
   final String clientId = '851b9e24e51b45b8a458f8a7d0b58880';

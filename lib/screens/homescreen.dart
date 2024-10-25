@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:spotifyapi/spotify_auth.dart';
+import 'package:lottie/lottie.dart';
+import 'package:spotifyapi/auth/spotify_auth.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'detail_screen.dart';
 import 'fetch_artists.dart';
-import 'model.dart';
+import '../model/model.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -17,6 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Track>? tracks;
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _searchFocusNode = FocusNode(); // Create a FocusNode
+
+
 
   @override
   void initState() {
@@ -67,32 +70,33 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: accessToken != null // Show AppBar only when logged in
+      backgroundColor: Colors.black,
+      appBar: accessToken != null
           ? AppBar(
         title: Text(
           'Tune Nest',
           style: TextStyle(
             fontFamily: 'Montserrat',
-            color: Colors.white, // Text color
+            color: Colors.white,
           ),
         ),
-        backgroundColor: Colors.black, // AppBar background color
-        elevation: 0, // No elevation for a flat look
+        backgroundColor: Colors.black,
+        elevation: 0,
       )
-          : null, // No AppBar when not logged in
+          : null,
       body: Stack(
         children: [
-          // Background
-          Container(
-            color: accessToken == null ? Colors.transparent : Colors.black, // Use black when logged in
-            child: accessToken == null
-                ? Image.asset(
-              'assets/images/splash.png', // Your image path
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: double.infinity,
-            )
-                : SizedBox.expand(), // Ensures the container takes up all space
+          // Background with Lottie animation
+          Center(
+            child: Container(
+              color: accessToken == null ? Colors.transparent : Colors.black,
+              child: accessToken == null
+                  ? Lottie.asset(
+                'assets/animations/lottie.json', // Path to your Lottie file
+            
+              )
+                  : SizedBox.expand(),
+            ),
           ),
           // Main content
           SingleChildScrollView(
@@ -175,8 +179,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 30),
-                  // Horizontal GridView for Artists
+                  SizedBox(height: 20),
+                  // Padding(padding: EdgeInsets.only(right: 190),
+                  //     // child: Text('Trending Artists', style: TextStyle(color: Colors.white,fontFamily: 'Montserrat', fontSize: 16),)),
+                  // //
+
+                  SizedBox(height: 15),
                   Container(
                     height: 135,
                     child: GridView.builder(

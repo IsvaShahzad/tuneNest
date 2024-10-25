@@ -1,6 +1,6 @@
 // fetch_tracks.dart
-import 'package:spotifyapi/spotify_auth.dart';
-import 'model.dart';
+import 'package:spotifyapi/auth/spotify_auth.dart';
+import '../model/model.dart';
 
 class TrackFetcher {
   final SpotifyAuth spotifyAuth;

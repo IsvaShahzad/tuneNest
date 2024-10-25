@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:spotifyapi/splash.dart';
 
-import 'homescreen.dart';
+import 'screens/homescreen.dart';
 
 void main() {
   runApp(MyApp());
